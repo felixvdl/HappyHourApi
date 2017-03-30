@@ -13,6 +13,6 @@ infatuation_data.each do |bar|
   sunday = bar['sunday']
   deal = bar['deal']
   info = bar['info']
-
-  bar = Bar.create!(name: name, location: location, monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, deal: deal, info: info)
+  geolocation = Geokit::Geocoders::GoogleGeocoder.geocode location
+  bar = Bar.create!(name: name, location: location, monday: monday, tuesday: tuesday, wednesday: wednesday, thursday: thursday, friday: friday, saturday: saturday, sunday: sunday, deal: deal, info: info, geolocation: geolocation.ll)
 end

@@ -3,7 +3,7 @@ infatuation_data = JSON.parse(infatuation)
 
 infatuation_data.each do |bar|
   name = bar['bar']
-  location = bar['location']
+  location = "#{bar['location']}, New York" 
   monday = bar['monday']
   tuesday = bar['tuesday']
   wednesday = bar['wednesday']

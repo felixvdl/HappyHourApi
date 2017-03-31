@@ -4,8 +4,7 @@ class Api::V1::BarsController < ApplicationController
   def index
     bars = Bar.all.to_a
     hour = Time.now.strftime("%H")
-
-    user_location = Geokit::LatLng.new(bar_params[:latitude], bar_params[:longitude])
+    user_location = Geokit::LatLng.new(request.headers['latitude'], request.headers['longitude'])
 
     case Time.now.strftime("%A").downcase
     when "wednesday"
@@ -13,7 +12,11 @@ class Api::V1::BarsController < ApplicationController
       bars = bars.select { |bar| ((bar.wednesday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.wednesday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
     when "thursday"
       bars = bars.select { |bar| bar.thursday != "no"}
-      bars = bars.select { |bar| ((bar.thursday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.thursday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == false }
+      bars = bars.select { |bar| ((bar.thursday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.thursday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
+      bars = bars.select { |bar| bar.geolocation != ','}
+    when "friday"
+      bars = bars.select { |bar| bar.friday != "no"}
+      bars = bars.select { |bar| ((bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
       bars = bars.select { |bar| bar.geolocation != ','}
     end
 

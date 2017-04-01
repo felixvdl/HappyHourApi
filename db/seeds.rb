@@ -1,4 +1,4 @@
-infatuation = File.read('./Public/infatuation_results.json')
+infatuation = File.read('./public/infatuation_results.json')
 infatuation_data = JSON.parse(infatuation)
 
 infatuation_data.each do |bar|

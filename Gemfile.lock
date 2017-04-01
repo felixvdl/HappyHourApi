@@ -51,6 +51,7 @@ GEM
     concurrent-ruby (1.0.5)
     erubis (2.7.0)
     ffi (1.9.18)
+    geocoder (1.4.3)
     geokit (1.11.0)
     geokit-rails (2.2.0)
       geokit (~> 1.5)
@@ -135,6 +136,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   byebug
+  geocoder
   geokit-rails
   json
   listen (~> 3.0.5)

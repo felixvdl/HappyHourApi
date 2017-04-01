@@ -19,7 +19,7 @@ class Api::V1::BarsController < ApplicationController
       bars = bars.select { |bar| bar.geolocation != ','}
     when "saturday"
       bars = bars.select { |bar| bar.friday != "no"}
-      bars = bars.select { |bar| ((bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == false }
+      bars = bars.select { |bar| ((bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.friday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
       bars = bars.select { |bar| bar.geolocation != ','}
     end
 

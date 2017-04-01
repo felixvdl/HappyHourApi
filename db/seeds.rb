@@ -1,9 +1,9 @@
-infatuation = File.read('../Downloads/infatuation_results.json')
+infatuation = File.read('./Public/infatuation_results.json')
 infatuation_data = JSON.parse(infatuation)
 
 infatuation_data.each do |bar|
   name = bar['bar']
-  location = "#{bar['location']}, New York" 
+  location = "#{bar['location']}, New York"
   monday = bar['monday']
   tuesday = bar['tuesday']
   wednesday = bar['wednesday']

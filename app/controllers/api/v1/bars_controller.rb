@@ -8,7 +8,7 @@ class Api::V1::BarsController < ApplicationController
     case Time.now.strftime("%A").downcase
     when "monday"
       bars = bars.select { |bar| bar.monday != "no"}
-      bars = bars.select { |bar| ((bar.monday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.monday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
+      bars = bars.select { |bar| ((bar.monday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.monday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == false }
     when "wednesday"
       bars = bars.select { |bar| bar.wednesday != "no"}
       bars = bars.select { |bar| ((bar.wednesday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.wednesday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }

@@ -1,5 +1,6 @@
 class Api::V1::BarsController < ApplicationController
 
+  require 'geocoder'
 
   def index
     bars = Bar.all.to_a
@@ -28,12 +29,14 @@ class Api::V1::BarsController < ApplicationController
       bars = bars.select { |bar| ((bar.saturday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/).first.first.to_i + 12)..(bar.saturday.scan(/(\d{1,2}:?\d{0,2}|\D{1,2})/)[3].first.to_i + 12)).to_a.include?(hour.to_i) == true }
       bars = bars.select { |bar| bar.geolocation != ','}
     end
-
-    bars.each do |bar|
-      bar.update(distance: user_location.distance_to(bar.geolocation))
-    end
-    bars.sort_by! { |bar| bar.distance}
-    p request.location.latitude
+    # if (request.headers['latitude'] != 'null' && request.headers['longitude'] != 'null' && request.headers['latitude'] != nil && request.headers['longitude'] != nil)
+    #   bars.each do |bar|
+    #     bar.update(distance: user_location.distance_to(bar.geolocation))
+    #   end
+    #   byebug
+    #   bars.sort_by! { |bar| bar.distance}
+    #
+    # end
     render json: bars
   end
 

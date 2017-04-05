@@ -6,6 +6,7 @@ class Api::V1::BarsController < ApplicationController
     bars = Bar.all.to_a
     hour = Time.now.strftime("%H")
     user_location = Geokit::LatLng.new(request.headers['latitude'], request.headers['longitude'])
+    p hour
     case Time.now.strftime("%A").downcase
     when "monday"
       bars = bars.select { |bar| bar.monday != "no"}
